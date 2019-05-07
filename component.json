@@ -1,0 +1,84 @@
+{
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/network-availableDelegations/2018-12-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "AvailableDelegations_List": {
+            "main": "./lib/actions/AvailableDelegations_List.js",
+            "title": "Gets all of the available subnet delegations for this subscription in this region.",
+            "description": "Gets all of the available subnet delegations for this subscription in this region.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AvailableDelegations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AvailableResourceGroupDelegations_List": {
+            "main": "./lib/actions/AvailableResourceGroupDelegations_List.js",
+            "title": "Gets all of the available subnet delegations for this resource group in this region.",
+            "description": "Gets all of the available subnet delegations for this resource group in this region.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AvailableResourceGroupDelegations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
